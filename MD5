@@ -1,4 +1,4 @@
-f1db3000f10b9e7be6bc8a8e124fe253 *DESCRIPTION
+64c6c8b28ada6f8ffe7253025cb26792 *DESCRIPTION
 d4bf50c3fd5013afd448d98f6d8b8b6f *NAMESPACE
 a72c18045a5c91528a84f50774ca6c2a *R/mully-package.R
 16d3c380d198ee14c70b14a023c305af *R/mully_constructor.R
@@ -7,17 +7,17 @@ c4a08dd0c8ce9eb339d15dc6200991f0 *R/mully_demo.R
 035adf913a8eaefd6cc8c7b49f894ae9 *R/mully_export.R
 ad221ddb7ffbec2eb5a2c79becc0ee66 *R/mully_import.R
 92415445859114998f1f95efb764ea6d *R/mully_layer.R
-6ad05c71ecc9c22b75a4471d5c1c96c0 *R/mully_merge.R
+f50b64f02da07bc34c32f787a2f1c8b4 *R/mully_merge.R
 c2144f3e3b95051914c1fb020a0c76e8 *R/mully_node.R
-7a43b3ac4f310f809484f02d0e8827e9 *R/mully_visualization.R
-d98bb95fe39dac79847ddf82bfc08d81 *README.md
+14818e7b44186f52dfd84a0b607d2ab2 *R/mully_visualization.R
+38c8e2c497a5966715be266022aff0dc *README.md
 d64049fb340d2450dc00f81c617db906 *build/vignette.rds
 827711dfe855323462998b9f94180227 *inst/doc/mully-pdf.R
 efcdb913e827ecbd8f2cdd98d0d273ab *inst/doc/mully-pdf.Rmd
-28a8916794be90c15ef04fe8e25cdbe4 *inst/doc/mully-pdf.pdf
+b6e0386f30c2178cc40b3a3e5dbf1924 *inst/doc/mully-pdf.pdf
 827711dfe855323462998b9f94180227 *inst/doc/mully-vignette.R
 d5382c4e2a6488bde6534f9b0d53f7e7 *inst/doc/mully-vignette.Rmd
-d45b13a154618843ea521ae72f08d1d5 *inst/doc/mully-vignette.html
+4276c112a4ddcb123b67e2aafb59b781 *inst/doc/mully-vignette.html
 f1e2eed4597c3fb9501e9648ce8774f9 *man/addEdge.Rd
 265e3b767fa31d351975d30af0409e8a *man/addLayer.Rd
 dabeebe06b17158c5e941dcc66f81f1c *man/addNode.Rd
@@ -40,7 +40,7 @@ e30befedf22ae0716efcb638a7b35645 *man/importNodesCSV.Rd
 fac07825c42a331b959c4c1c3081e666 *man/mully-package.Rd
 db6752e0bcaea4422588bf4fb05e5398 *man/mully.Rd
 465fe29200633734951f288b4de4124c *man/plot.mully.Rd
-f12ad8c201e8de8d50afc96b64fb1787 *man/plot3d.Rd
+4298e411829eb522d5172956b9f3c800 *man/plot3d.Rd
 6d0c7407b47abc41dc3eba2a385ae106 *man/print.mully.Rd
 ee75d9d9845d4c97a8e19a0a7339eba1 *man/removeEdge.Rd
 e84cb3acb77c1b6f8adf06b14150242d *man/removeLayer.Rd
