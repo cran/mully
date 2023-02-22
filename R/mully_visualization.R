@@ -53,7 +53,7 @@ getMarkGroups <- function(g) {
 #' @param x The input graph
 #' @param layout The layout. Can either be random or scaled
 #' @param  ... Other arguments to be passed to \link[igraph]{plot.igraph}
-#'
+#' @return No return value. A 2D plot of the given graph is created.
 #' @export
 #' @import igraph
 #' @importFrom randomcoloR randomColor
@@ -65,16 +65,22 @@ getMarkGroups <- function(g) {
 plot.mully <- function(x, layout,...) {
   gps = getMarkGroups(x)
 
-  cols = randomColor(count = x$iLayer)
-  usedCols = unique(V(x)$color)
+  colrs = randomColor(count = x$iLayer)
+
+  assignedColors=V(x)$color
+  usedCols = unique(assignedColors)
   if (is.null(V(x)$color))
     V(x)$color = NA
+
   for (i in 1:dim(x$layers)[1]) {
-    nodesinlayer=getLayerByID(x,i)
-    if (NA %in%nodesinlayer$color) {
-      if (!cols[i] %in% usedCols) {
-        nodesinlayer$color[which(is.na(nodesinlayer$color))] = cols[i]
-        usedCols = c(usedCols, cols[i])
+    idLayer=as.integer(x$layers$ID[i])
+    nodesid=which(V(x)$n == idLayer)
+    if(is.null(nodesid) || length(nodesid)==0)
+      next
+    if (NA%in%V(x)[nodesid]$color) {
+      if (!colrs[idLayer] %in% usedCols) {
+        V(x)[nodesid]$color = colrs[idLayer]
+        usedCols = c(usedCols, colrs[idLayer])
       }
       else{
         c = randomColor(count = 1)
@@ -82,7 +88,7 @@ plot.mully <- function(x, layout,...) {
           c = randomColor(count = 1)
         }
         usedCols = c(usedCols, c)
-        V(x)[which(V(x)$n == i)]$color = c
+        V(x)[nodesid]$color = c
       }
     }
   }
@@ -135,7 +141,7 @@ discpos = function(n, r = 1) {
 #' @param edge.width The edge width. Default set to 5.
 #' @param edge.arrow.size The edges' arrow size. Default set to 10
 #' @param edge.arrow.width The  edges' arrow width. Default set to 1
-#'
+#' @return No return value. A 3D plot of the given graph is created.
 #'
 #'
 #' @export
@@ -162,15 +168,15 @@ plot3d <- function(g, layers = TRUE,
   if(length(V(g))==0){
     stop("This mully Graph has no nodes.")
   }
-  rgl.open()
-  rgl.bg(
+  rgl::open3d()
+  rgl::bg3d(
     sphere = TRUE,
     color = c("white", "blue"),
     lit = FALSE,
     back = "lines"
   )
   gps = getMarkGroups(g)
-
+  nLayers=dim(g$layers)[1]
   colrs = randomColor(count = g$iLayer)
 
   assignedColors=V(g)$color
@@ -178,7 +184,7 @@ plot3d <- function(g, layers = TRUE,
   if (is.null(V(g)$color))
     V(g)$color = NA
 
-  for (i in 1:dim(g$layers)[1]) {
+  for (i in 1:nLayers) {
     idLayer=as.integer(g$layers$ID[i])
     nodesid=which(V(g)$n == idLayer)
     if(is.null(nodesid) || length(nodesid)==0)
@@ -271,8 +277,8 @@ plot3d <- function(g, layers = TRUE,
         coord = t(as.matrix(layout1[temp, ]))
       else
         coord = as.matrix(layout1[temp:(temp + nNodes - 1), ])
-      plane = suppressWarnings(get3DPlane(coord, dim(g$layers)[1],nNodes))
-      rgl.planes(
+      plane = get3DPlane(coord, nLayers,nNodes)
+      planes3d(
         0,
         b = plane[2],
         0,
@@ -281,13 +287,12 @@ plot3d <- function(g, layers = TRUE,
         alpha = 0.2
       )
       #Add layers' names
-      text3d(
+      rgl::text3d(
         x = -max(abs(layout[, 1]))-1,
         y = coord[1, 2],
         z = min(abs(layout[, 3])) - 2,
         texts = paste0(nameLayer," Layer",sep=""),
         color = clrs[iColr],
-        alpha = 1
       )
       iColr=iColr+1
       temp = temp + nNodes
